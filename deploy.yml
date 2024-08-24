@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'  # Specify the Node.js version to use
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to Heroku
+        uses: akshnz/heroku-deploy@v1.0.0
+        with:
+          api-key: ${{ secrets.HEROKU_API_KEY }}
+          app-name: your-heroku-app-name
+          branch: main
+
+      - name: Notify on deployment success
+        if: success()
+        run: echo "Deployment successful."
+
+      - name: Notify on deployment failure
+        if: failure()
+        run: echo "Deployment failed."
