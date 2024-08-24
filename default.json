@@ -1,0 +1,26 @@
+{
+  "app": {
+    "name": "MyApp",
+    "port": 3000,
+    "env": "development"
+  },
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "username": "user",
+    "password": "password",
+    "name": "myapp_db"
+  },
+  "logging": {
+    "level": "info",
+    "file": "logs/app.log"
+  },
+  "api": {
+    "baseURL": "https://api.example.com",
+    "timeout": 5000
+  },
+  "security": {
+    "jwtSecret": "your_jwt_secret_key",
+    "saltRounds": 10
+  }
+}
