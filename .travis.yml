@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+  - "14"  # Specify the Node.js version. Adjust according to your project's requirements.
+
+# Caches the `node_modules` directory to speed up build times
+cache:
+  directories:
+    - node_modules
+
+# Install dependencies and run tests
+install:
+  - npm install
+
+script:
+  - npm run lint  # Run linting (optional)
+  - npm test      # Run tests
+
+# Deploy configuration (optional)
+deploy:
+  provider: npm
+  email: $NPM_EMAIL
+  api_key: $NPM_API_KEY
+  on:
+    tags: true
+    repo: username/repository-name  # Replace with your GitHub username and repository name
+
+# Notifications (optional)
+notifications:
+  email:
+    on_success: never
+    on_failure: always
